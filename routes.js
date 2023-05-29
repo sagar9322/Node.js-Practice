@@ -37,6 +37,7 @@ if (url === '/massage' && method === 'POST') {
     return res.end();
 }
 
+
 res.setHeader('Content-Type', 'text/html');
 res.write('<html>');
 res.write('<head><title>My First Node Page</title><head>');
@@ -46,13 +47,13 @@ res.end();
 
 }
 
-// module.exports = requestHandler;
+module.exports = requestHandler;
 
 // module.exports.handler = requestHandler;
 
-module.exports = {
-    handler: requestHandler,
-    someText: "Hello Sagar"
-};
+// module.exports = {
+//     handler: requestHandler,
+//     someText: "Hello Sagar"
+// }
 
 
