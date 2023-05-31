@@ -1,34 +1,32 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const adminRoute = require('./routes/admin');
+const shopRouter = require('./routes/shop');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
-// app.use((req, res, next) => {
-//     console.log("in the middleware!");
-//     next();
-// });
-app.use('/add-product', (req, res, next) => {
-    res.send('<html><body><form action="/product" method="POST"><label>Product Name</label><input type="text" name="title"><label>Size</label><input type="number" name="size"><button type="submit">Add Product</button></form></body></html>');
-});
 
-// app.use((req, res, next) => {
-//     console.log("in another middleware!");
-//     res.send('<h1>Hello Fron Express!</h1>');
-// });
-app.use('/product', (req, res, next) => {
-    console.log(req.body);
-    res.redirect('/');
-});
+app.use('/admin', adminRoute);
+app.use('/shop', shopRouter);
 
-app.use('/', (req, res, next) => {
-    res.send('<h1>Hello From Express</h1>');
-});
+app.use((req, res, next) => {
+    res.status(404).send("<h1>Page Not Found</h1>");
+})
+
+
 
 app.listen(3000);
 
 
-
+// app.use((req, res, next) => {
+//     console.log("in the middleware!");
+//     next();
+// });
+// app.use((req, res, next) => {
+//     console.log("in another middleware!");
+//     res.send('<h1>Hello Fron Express!</h1>');
+// });
 
 
 
