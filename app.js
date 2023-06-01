@@ -2,16 +2,21 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const adminRoute = require('./routes/admin');
 const shopRouter = require('./routes/shop');
+const fs = require("fs");
+const path = require('path');
+const contactRouter = require('./routes/contact-us')
 
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin', adminRoute);
-app.use('/shop', shopRouter);
+app.use(adminRoute);
+app.use(shopRouter);
+app.use(contactRouter);
 
 app.use((req, res, next) => {
-    res.status(404).send("<h1>Page Not Found</h1>");
+    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
 })
 
 
