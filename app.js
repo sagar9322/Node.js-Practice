@@ -5,6 +5,7 @@ const shopRouter = require('./routes/shop');
 const fs = require("fs");
 const path = require('path');
 const contactRouter = require('./routes/contact-us')
+const controller = require('./controller/products');
 
 const app = express();
 
@@ -15,9 +16,7 @@ app.use(adminRoute);
 app.use(shopRouter);
 app.use(contactRouter);
 
-app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-})
+app.use(controller.error404)
 
 
 
